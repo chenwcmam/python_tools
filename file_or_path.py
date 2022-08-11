@@ -4,6 +4,7 @@ __author__ = "ChenWC"
 
 import os
 import re
+import sys
 import platform
 
 
@@ -23,12 +24,24 @@ def get_system_split():
     return os.sep
 
 
-def get_father_path(folder_path):
-    # 获取输入路径的父目录
-    father_path_temp = folder_path.rsplit(os.sep, 1)[0]  # 根据当前系统分隔符对输入路径进行分割
-    if re.match(r'.*:$', father_path_temp):
-        print(f'-----father path {father_path_temp} ends with ":"')  # 若父目录以:结尾，说明已经到了磁盘根路径
-        return father_path_temp + os.sep
+def get_parent_path(path):
+    # 获取输入路径或文件的父目录
+    parent_path_temp = path.rsplit(os.sep, 1)[0]  # 根据当前系统分隔符对输入路径进行分割
+    if re.match(r'.*:$', parent_path_temp):
+        print(f'-----parent path {parent_path_temp} ends with ":"')  # 若父目录以:结尾，说明已经到了磁盘根路径
+        return parent_path_temp + os.sep
     else:
-        print(f'-----father path {father_path_temp} ends not with ":"')
-        return father_path_temp
+        print(f'-----parent path {parent_path_temp} ends not with ":"')
+        return parent_path_temp
+
+
+def get_curr_exe_path():
+    # 获取Windows下当前可执行文件的所在路径
+    curr_path = os.path.dirname(sys.executable) if getattr(sys, 'frozen', False) else os.path.dirname(__file__)
+    # 或者 curr_path = os.getcwd() 也可以获取当前可执行文件的路径
+    return curr_path
+
+
+def get_curr_file_path():
+    # 获取当前python执行文件的所在路径
+    return os.path.dirname(__file__)

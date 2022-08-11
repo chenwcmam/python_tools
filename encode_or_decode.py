@@ -17,10 +17,9 @@ def md5encode(raw_data):
     a = hashlib.md5()
     a.update(raw_data.encode())
     b = a.hexdigest()
-    return b[0:16]
+    return b
 
 
 def base64decode(text):
     # 对base64数据进行解码
-    result = base64.b64decode(text)
-    return result
+    return base64.b64decode(text)
