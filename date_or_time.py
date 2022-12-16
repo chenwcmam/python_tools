@@ -26,6 +26,7 @@ def date_format_validate(date_text, date_format):
     except ValueError:
         return False
 
+
 def time_num_to_string(number, format_string='%Y-%m-%d %H:%M:%S'):
     """
     将数字格式的时间戳转换为字符串格式, 默认为
@@ -34,3 +35,7 @@ def time_num_to_string(number, format_string='%Y-%m-%d %H:%M:%S'):
     :return:
     """
     return datetime.fromtimestamp(number).strftime(format_string)
+
+
+def current_time_str(format_string='%Y-%m-%d %H:%M:%S'):
+    return datetime.datetime.now().strftime(format_string)
